@@ -1,0 +1,20 @@
+function convertServerTime() {
+    for (const el of document.querySelectorAll(":scope [data-timestamp]")) {
+        let time = el.getAttribute("data-timestamp");
+        let d = dayjs(time * 1000);
+
+        if (!time || !d) {
+            return;
+        }
+
+        let userTime = d.locale("ru").format(el.getAttribute("data-format") || "MM/DD/YYYY, hh:mm A");
+
+        if (el.tagName.toLowerCase() === "input" || el.tagName.toLowerCase() === "textarea") {
+            el.value = userTime;
+        } else {
+            el.textContent = userTime;
+        }
+    }
+}
+
+convertServerTime();

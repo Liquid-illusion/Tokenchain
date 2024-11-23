@@ -1,0 +1,133 @@
+<html>
+    <head>
+        <title>Log In Page | Gexchain</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+
+        <link rel="icon" type="image/png" href="default/img/logo.png" />
+
+        <!-- 
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+            <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&amp;display=swap" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet" /> 
+        -->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/decimal.js/10.4.3/decimal.min.js"></script>
+
+        <script src="default/js/common.js%3Fv=1732348446520" defer></script>
+        <script src="default/js/deposits.js%3Fv=1732348446520"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css" />
+
+        <link rel="stylesheet" type="text/css" href="default/css/common.css" />
+        <link rel="stylesheet" type="text/css" href="fontawesome/css/all.css" />
+    </head>
+    <body>
+        <div class="auth-body">
+    <div class="auth-header">
+        <a class="auth-logo" href="default/img/welcome-bonus.png.html">
+            <img src="default/img/logo.png" class="logo-image" alt="" />
+            <span class="logo-text">Gexchain</span>
+        </a>
+        <div class="if-not">
+            <span>Don’t have an account? <a href="register.html">Sign up</a> </span>
+        </div>
+    </div>
+    <div class="auth-image"></div>
+    <div class="auth-main-block">
+        <div class="auth">
+            <h2>Log in</h2>
+            
+            <form id="login-form" class="">
+                <div id="login-first-step">
+                    <label>
+                        Email
+                        <input id="email-input" type="email" placeholder="Email address" name="email" class="" />
+                    </label>
+                    <label>
+                        Password
+                        <div class="password">
+                            <input id="password-input" type="password" placeholder="Password" name="password" />
+                            <i class="fa-regular fa-eye eye"></i>
+                        </div>
+                    </label>
+                </div>
+                <div id="login-second-step" style="display: none; width: 100%">
+                    <label>
+                        2FA code
+                        <input id="twofa-input" placeholder="Enter the code from Authenticator app" name="twofa" autocomplete="nope" />
+                    </label>
+                </div>
+                <button id="send-button" class="auth-button">Log in</button>
+                <a class="grey-button login mt-4" style="width: 100%;height: 44px;border: 2px solid #353945;text-align: center;" href="login/recovery.html">Forgot your password?</a>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    const button = document.getElementById("send-button");
+    const oldButtonHtml = button.innerHTML;
+
+    document.getElementById("login-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        if (!document.getElementById("email-input").value) {
+            return new Noty({ text: "You didn't enter an email", type: "error", timeout: 5000 }).show();
+        }
+
+        if (!document.getElementById("password-input").value) {
+            return new Noty({ text: "You didn't enter a password", type: "error", timeout: 5000 }).show();
+        }
+
+        button.setAttribute("disabled", "disabled");
+        button.innerHTML = '<i class="fa-solid fa-loader fa-spin"></i>';
+
+        let response = await fetch("/login", {
+            method: "POST",
+            body: new URLSearchParams(new FormData(document.querySelector("#login-form"))),
+        });
+
+        let json = await response.json();
+
+        if (json.success) {
+            window.location.href = "/balance";
+        } else if (json.data?.step === "2fa") {
+            document.getElementById("login-first-step").style.display = "none";
+            document.getElementById("login-second-step").style.display = "";
+
+            button.removeAttribute("disabled");
+            button.innerHTML = oldButtonHtml;
+        } else {
+            button.removeAttribute("disabled");
+            button.innerHTML = oldButtonHtml;
+            new Noty({ text: json.message, type: "error", timeout: 5000 }).show();
+        }
+    });
+
+    const eyeIcons = document.querySelectorAll(".fa-eye");
+
+    for (const icon of eyeIcons) {
+        icon.addEventListener("click", function () {
+            const passwordField = this.previousElementSibling;
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                this.classList.add("fa-eye-slash");
+            } else {
+                passwordField.type = "password";
+                this.classList.remove("fa-eye-slash");
+            }
+        });
+    }
+</script>
+
+        
+
+    </body>
+</html>

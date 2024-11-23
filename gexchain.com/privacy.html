@@ -1,0 +1,285 @@
+<html>
+    <head>
+        <title>Privacy | Gexchain</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+
+        <link rel="icon" type="image/png" href="default/img/logo.png" />
+
+        <!-- 
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+            <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&amp;display=swap" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet" /> 
+        -->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/decimal.js/10.4.3/decimal.min.js"></script>
+
+        <script src="default/js/common.js%3Fv=1732348446842" defer></script>
+        <script src="default/js/deposits.js%3Fv=1732348446842"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css" />
+
+        <link rel="stylesheet" type="text/css" href="default/css/common.css" />
+        <link rel="stylesheet" type="text/css" href="fontawesome/css/all.css" />
+    </head>
+    <body>
+        <header>
+    <div class="header-container">
+        <div class="left-block">
+            <a class="logo" href="default/img/welcome-bonus.png.html">
+                <img src="default/img/logo.png" class="logo-image" alt="" />
+                <span class="logo-text">Gexchain</span>
+            </a>
+            
+            <nav class="header-nav">
+                <a class="nav-element nl" href="trade.html">Spot Trading</a>
+                <a class="nav-element nl" href="about.html">About Us</a>
+                <a class="nav-element nl" href="licenses.html">Regulatory Licenses</a>
+                <a class="nav-element nl" href="faq.html">FAQ</a>
+            </nav>
+            
+        </div>
+        
+        <div class="right-block" style="width: auto">
+            <a class="blue-button sign-up" href="register.html" style="margin-right: 20px">Sign Up</a>
+            <a class="grey-button login" href="login.html">Log In</a>
+            <div class="mobile-login-buttons">
+                <a class="blue-button sign-up" href="register.html" style="margin-right: 8px">Sign Up</a> 
+                <a class="grey-button login" href="login.html" style="margin-right: 4px">Log In</a></div>
+            <div class="burger" id="burger-menu-button" style="background-image: url('default/img/burger-menu.svg')"></div>
+        </div>
+        
+    </div>
+</header>
+<style>
+    .menu-separator {
+        border: 0;
+        border-top: 2px solid #787e8f;
+        width: 82.8%;
+        margin: 32px auto;
+    }
+    .mobile-login-buttons {
+        display: none;
+        width: 180px;
+        height: 100%;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        width: auto;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .mobile-login-buttons {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+        }
+    }
+
+    @media only screen and (max-width: 434px) {
+        .mobile-login-buttons a.blue-button.sign-up {
+            display: none;
+        }
+    }
+</style>
+<div class="burger-menu" id="burger-menu" style="left: 100%">
+    <nav class="burger-navigation">
+        
+            <a class="burger-nav__element grey body1" href="trade.html">Spot Trading</a>
+            <a class="burger-nav__element grey body1" href="about.html">About Us</a>
+            <a class="burger-nav__element grey body1" href="licenses.html">Regulatory Licenses</a>
+            <a class="burger-nav__element grey body1" href="faq.html">FAQ</a>
+            <hr class="menu-separator">
+            <a class="burger-nav__element grey body1" href="privacy.html">Privacy Policy</a>
+            <a class="burger-nav__element grey body1" href="terms.html">Term of Use</a>
+            <a class="burger-nav__element grey body1" href="cdn-cgi/l/email-protection.html#45363035352a37310522203d262d242c2b6b262a28">Contact Us</a>
+        
+    </nav>
+    
+</div>
+<script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    const burgerButton = document.getElementById("burger-menu-button");
+    const burgerMenu = document.getElementById("burger-menu");
+
+    burgerButton.addEventListener("click", () => {
+        if (burgerMenu.style.left === "0px") {
+            document.body.style.position = "";
+            document.body.style.width = "";
+            burgerMenu.style.left = "";
+            burgerButton.style.backgroundImage = "url('/default/img/burger-menu.svg')";
+        } else {
+            document.body.style.position = "fixed";
+            document.body.style.width = "100vw";
+            burgerMenu.style.left = "0px";
+            burgerButton.style.backgroundImage = "url('/default/img/burger-close.svg')";
+        }
+    });
+</script>
+
+<div class="container privacy">
+    
+    <div>
+        <h2>General</h2>
+        <p>Gexchain Financial Company and its affiliates (hereinafter, &#39;Gexchain Financial Company&#39;, &#39;Gexchain&#39;, &#39;we&#39;, &#39;us&#39; or &#39;our&#39;) are committed to protecting and respecting your privacy. This Privacy Policy (together with our Terms of Use) governs our collection, processing and use of your Personal Information. We define &#39;Personal Information&#39; as information which identifies you personally, e.g., your name, address, e-mail address, trades etc.</p>
+    </div>
+    
+    <div>
+        <h2>Who is Gexchain</h2>
+        <p>Gexchain Australia’s largest fully regulated and licensed AML/CTF compliant AUSTRAC registered Dual Gateway Exchange Platform. Buy, sell, send, receive and trade cryptocurrencies.</p>
+    </div>
+    
+    <div>
+        <h2>The types of Personal Information we collect</h2>
+        <p>We will process your Personal Information only for the purpose(s) of providing to you the service(s) that you ask us to provide you and to satisfy the legal obligations stemming from regulatory obligations that arise from providing you the service(s)</p>
+    </div>
+    
+    <div>
+        <h2>IP Addresses</h2>
+        <p>We may collect information about your computer, including where available your IP address, operating system and browser type, for system administration and to report aggregate information to our advertisers. This is statistical data about our users&#39; browsing actions and patterns and will not be used to identify any individual unless that same individual.</p>
+    </div>
+    
+    <div>
+        <h2>Cookies</h2>
+        <p>We use a browser feature known as a &#39;cookie&#39;, which assigns a unique identification to your computer. Cookies are typically stored on your computer&#39;s hard drive. Information collected from cookies is used by us to evaluate the effectiveness of our Site, analyze trends, and administer the Platform. The information collected from cookies allows us to determine such things as which parts of our Site are most visited and difficulties our visitors may experience in accessing our Site. With this knowledge, we can improve the quality of your experience on the Platform by recognizing and delivering more of the most desired features and information, as well as by resolving access difficulties. We also use cookies and/or a technology known as web bugs or clear gifs, which are typically stored in emails to help us confirm your receipt of, and response to, our emails and to provide you with a more personalized experience when using our Site. We use third party service provider(s), to assist us in better understanding the use of our Site. Our service provider(s) will place cookies on the hard drive of your computer and will receive information that we select that will educate us on such things as how visitors navigate around our site, what products are browsed, and general Transaction information. Our service provider(s) analyses this information and provides us with aggregate reports. The information and analysis provided by our service provider(s) will be used to assist us in better understanding our visitors&#39; interests in our Site and how to better serve those interests. The information collected by our service provider(s) may be linked to and combined with information that we collect about you while you are using the Platform. Our service provider(s) is/are contractually restricted from using information they receive from our Site other than to assist us. By using our Site, you are agreeing that we may use cookies for the purposes set out above. The company will keep records of all transfers of Personal Information to third parties and this information, where possible, can be provided to you.</p>
+    </div>
+    
+    <div>
+        <h2>Disclosure of Personal Information</h2>
+        <p>We use the Personal Information for the purposes indicated at the time you provide us with such information, and/or otherwise for the purposes set out in this Privacy Policy and/or as otherwise permitted by law. We may make available the Personal Information that you provide to us to our affiliates, agents, representatives, trusted service providers and contractors for these limited purposes upon your express consent or for and during the provision of the service that you would have requested. We may also share Users’ Personal Information with financial institutions, insurance companies or other companies in the case of a merger, divestiture, or other corporate re-organization and notify you of such sharing of your information to be able to exercise any of your rights where applicable. We may also share Users&#39; Personal Information with law enforcement or regulatory agencies, as may be required by law. We may not be able to inform you of such sharing of data due to legal restrictions. Any third party which receives or has access to Personal Information shall be required by us to protect such Personal Information and to use it only to carry out the services they are performing for you or for Gexchain, unless otherwise required or permitted by law. Such a third party, except for regulatory authorities, would be contractually bound to adhere to the same security and confidentiality policies as Gexchain and assume the same responsibilities as Gexchain. The legitimate exercise of any of your rights with Gexchain will also be notified to be applied by any such third parties having been given access to your Personal Information. We will ensure that any such third party is aware of our obligations under this Privacy Policy, and we will enter into contracts with such third parties by which they are bound by terms no less protective of any Personal Information disclosed to them than the obligations we undertake to you under this Privacy Policy, or which are imposed on us under applicable data protection laws.</p>
+    </div>
+    
+    <div>
+        <h2>Your rights</h2>
+        <p>You have the right to access your Personal Information and to require the correction, updating and blocking of inaccurate and/or incorrect data by sending an email to us at e-mail mentioned on the website (out e-mail), you can do these actions in your account profile page yourself (if applicable). Upon your written request at our e-mail, we will inform you of the Personal Information relating to you that we hold and the use and general disclosure of your Personal Information. We will also give you a copy of the Personal Information we have retained. There may be a minimal charge for providing you additional copies of your Personal Information to cover administrative costs. You may also request the deletion or destruction of both the Account and Personal Information by sending an email to our e-mail. Gexchain will action your request immediately, except, where this is not consistent with its legal and regulatory obligations. You may also ask us to transfer your Personal Information to another controller of your choice. To ensure the confidentiality, integrity and availability of your information to yourself, we may request you to confirm your identity by providing identification documentation and/or other methods prior to assisting you in exercising any of your rights. іf you refuse to prove your identity, we may decline to take actions in respect of your data, save restricting processing, until we can ensure that such actions are the true wish of the data subject. In the carrying out of our services we may use automated processing and profiling to reduce the risks of fraud, money laundering and abuse of our services. Through this automated processing, we carry out an analysis of your identification, transactional and behavioral patterns. We may not be able to provide you with some or all our services if you do not wish this automated processing to be carried out. If you feel that this processing might be detrimental to you, we can provide you with further information about this automated processing by contacting us on our e-mail.</p>
+    </div>
+    
+    <div>
+        <h2>Security</h2>
+        <p>We have implemented technical and organizational security measures to ensure the confidentiality of your Personal Information and to protect your Personal Information from loss, misuse, alteration or destruction. Only authorized personnel of Gexchain have access to your Personal Information, and these personnel are required to treat the information as confidential. Where you have consented to, or we are obliged to pass on Personal Information to third parties to provide you with a requested service or in the carrying out of a regulatory or legal obligation, we will request that the same levels of technical and organizational security measure be applied through contractual arrangements, where possible. Technical and organizational security measures in place will, from time to time, be reviewed in line with legal and technical developments. іn the event of a personal data breach or the failure of the measures of protection of such information we will immediately notify you without undue delay.</p>
+    </div>
+    
+    <div>
+        <h2>Links</h2>
+        <p>Here may be links from our Site to other sites and resources provided by third parties. This Privacy Policy applies only to our Site. Accessing those third-party sites or sources requires you to leave our Site. We do not control those third-party sites or any of the content contained therein, and you agree that we are in no way responsible or liable for any of those third-party sites, including, without limitation, their content, policies, failures, promotions, products, services or actions and/or any damages, losses, failures or problems caused by, related to or arising from those sites. We encourage you to review all policies, rules, terms and regulations, including the privacy policies, of each site that you visit</p>
+    </div>
+    
+    <div>
+        <h2>Retention of Personal Information</h2>
+        <p>Your information is held within our servers. Access to this information is provided to employees of Gexchain whose office may be inside and/or outside of the European Union all our employees adhere to the principles of data security and processes as those within the European Union. We will hold your Personal Information only for as long as it is necessary for the purposes described in this Privacy Policy and our own legal and regulatory requirements. іn accordance with record keeping activities for Anti-Money Laundering, Tax and Company legal obligations, we will retain Accounts and Personal Information for, at least, a period of ten years after a user closes his account with us. Data stored for regulatory purposes only will be protected from unnecessary processing and will be held only for the purpose of being able to provide information or access to relevant authorities.</p>
+    </div>
+    
+    <div>
+        <h2>Disposal of Personal Information</h2>
+        <p>Once we do not have any obligation to providing you with a service you requested, nor an obligation to hold Personal Information for regulatory or legal purpose, we will anonymize or dispose of your Personal Information in line with acceptable industry and security standards so that this cannot be subsequently retrieved and associated to you. Where we cannot directly remove such records, such as in archived backups, we will retain a log of which Personal Information should be removed if ever the backup data is restored.</p>
+    </div>
+    
+    <div>
+        <h2>Marketing</h2>
+        <p>We will ask you for your consent on registration or post-registration, by providing you the ability to check marketing preferences check boxes located within your account profile page to allow us to contact you or use your Personal Information for marketing purposes. You have the right to retract the consent for us to process your Personal Information for marketing purposes. You can exercise your right to prevent such processing by unchecking marketing preferences check boxes on your account profile or by contacting us at any time on our e-mail.</p>
+    </div>
+    
+    <div>
+        <h2>Our Data Protection Officer</h2>
+        <p>Our Data Protection Officer is the person in charge of ensuring our company adheres to this privacy policy. This person is also the main contact for our Data Protection Supervisory Authority. The Data Protection Officer may be contacted on separate e-mail listed on the contact us page.</p>
+    </div>
+    
+    <div>
+        <h2>Data Protection Supervisory Authority</h2>
+        <p>You may contact an appropriate Data Protection Supervisory Authority if you wish to discuss with them any instance where you feel we may not be adhering to the terms within this Privacy Policy or to raise a complaint.</p>
+    </div>
+    
+    <div>
+        <h2>Changes</h2>
+        <p>Our Site policies, content, information, promotions, disclosures, disclaimers and features may be revised, modified, updated, and/or supplemented at any time and without prior notice at the sole and absolute discretion of Gexchain. If we change this Privacy Policy, will take steps to notify all users by a notice on our Site and will post the amended Privacy Policy on the Site. If we consider that your rights may be affected by any such changes, we will request you to confirm your consideration and acceptance prior to continue our relationship with you.</p>
+    </div>
+    
+    <div>
+        <h2>Fraud, Phishing and Email scams disclaimer</h2>
+        <p>Please be notified that Gexchain is not in any partnership with entities who represent themselves as customer support agents, providing customer support services via phone and/or social media and promise to help solve your issues for money. Remember - customer support is provided only via the Gexchain website and is always provided free of charge.</p>
+    </div>
+    
+    <div>
+        <h2>Contact Us</h2>
+        <p>If you have any questions, comments, or concerns not specifically regarding our Privacy Policy and/or practices as it or they relate to the Platform, please contact us at our email address.</p>
+    </div>
+    
+</div>
+<footer>
+    <div class="footer-container">
+        <a class="logo logo-footer" href="default/img/welcome-bonus.png.html"><img src="default/img/logo.png" class="logo-image" alt="" /><span class="logo-text logo-footer-text">Gexchain</span></a>
+        <ul>
+            <li><b>Company</b></li>
+            <li><a href="about.html">About us</a></li>
+            <ul style="margin-top: 48px">
+                <li><b>Support Service:</b></li>
+                
+                <li><a href="cdn-cgi/l/email-protection.html#9ae9efeaeaf5e8eedafdffe2f9f2fbf3f4b4f9f5f7"><span class="__cf_email__" data-cfemail="16656366667964625671736e757e777f783875797b">[email&#160;protected]</span></a></li>
+            </ul>
+            <ul style="margin-top: 48px">
+                <li><b>Token Listing and Business Offers:</b></li>
+                <li><a href="cdn-cgi/l/email-protection.html#10726563797e75636350777568737871797e3e737f7d"><span class="__cf_email__" data-cfemail="f99b8c8a90979c8a8ab99e9c819a91989097d79a9694">[email&#160;protected]</span></a></li>
+            </ul>
+        </ul>
+        <ul>
+            <li><b>Legal</b></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Use</a></li>
+            <li><a href="risk.html">Risk Warning</a></li>
+            <li><a href="licenses.html">Regulatory Licenses</a></li>
+            <!-- <li><a href="/cookies">Cookies Policy</a></li> -->
+        </ul>
+        <!-- <ul>
+            <li><b>Tools & Services</b></li>
+            <li><a href="/market-crypto">Current Market</a></li>
+            <li><a href="/ventures">Ventures</a></li>
+        </ul> -->
+        <ul>
+            <li><b>Help</b></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <ul style="margin-top: 48px">
+                <li><b>Info</b></li>
+                <li><a href="fees.html">Fees</a></li>
+                <li><a href="referral.html">Referrals</a></li>
+                <li><a href="security.html">Security</a></li>
+            </ul>
+        </ul>
+        
+        <ul>
+            <li><b>Our Socials</b></li>
+            
+            <li>
+                <a href="https://www.facebook.com/Gexchain/"><i class="fa-brands fa-facebook me-2"></i>Facebook</a>
+            </li>
+             
+            
+            <li>
+                <a href="https://www.instagram.com/gexchainoffical/"><i class="fa-brands fa-instagram me-2"></i>Instagram</a>
+            </li>
+             
+            
+            <li>
+                <a href="https://twitter.com/gexchainoffical"><i class="fa-brands fa-twitter me-2"></i>Twitter</a>
+            </li>
+             
+             
+            
+            
+        </ul>
+        
+    </div>
+    <div class="copyright"><span>Copyright © 2016 - 2024 Gexchain. All rights reserved</span></div>
+</footer>
+
+        
+
+    <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

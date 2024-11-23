@@ -1,0 +1,273 @@
+const apiEndpoints = {
+    BTC: "https://bitcoinblockexplorers.com",
+    LTC: "https://litecoinblockexplorer.net",
+    BCH: "https://bchblockexplorer.com",
+    DOGE: "https://dogeblocks.com",
+    DASH: "https://dashblockexplorer.com",
+    ETH: "https://ethblockexplorer.org",
+    BSC: "https://bscbook.guarda.com",
+    TRX: "https://apilist.tronscan.org",
+    BNB: "https://dex.binance.org",
+    MATIC: "https://maticbook.guarda.com",
+    ETC: "https://etcblockexplorer.com",
+    FTM: "https://deep-index.moralis.io",
+    SOL: "https://solana-gateway.moralis.io",
+    AVAX: "https://api-beta.avascan.info",
+    XLM: "https://horizon.stellar.org",
+    XRP: "https://api.xrpscan.com",
+    ZEC: "https://zecbook.guarda.co",
+    ALGO: "https://algobook.guarda.com",
+
+    // "DOT": "",
+    // "ADA": "",
+};
+
+async function fetchAPI(url, currency, address) {
+    let response;
+
+    try {
+        let headers = {
+            "Content-Type": "application/json",
+        };
+
+        if (url.includes("moralis.io")) {
+            headers["x-api-key"] = "qpupCUJzS3pQJf0VR9j9SC805HGoSDBGxXUnGHUfjjvZE1Uby5gNMBA33FKWzI2L";
+        }
+
+        response = await fetch(url.replace("{address}", address), { headers });
+
+        if (!response.ok) {
+            if (response.status === 404) {
+                return null;
+            }
+
+            throw new Error("HTTP status " + response.status);
+        }
+
+        const data = await response.json();
+
+        return data;
+    } catch (err) {
+        let errorDetails = err.stack;
+        errorDetails += "\n\nURL: " + url.replace("{address}", address);
+        errorDetails += "\nCurrency: " + currency;
+
+        if (response) {
+            errorDetails += "\nResponse status: " + response.status;
+
+            try {
+                let responseBody = await response.text();
+
+                if (responseBody) {
+                    responseBody = responseBody.slice(0, 250);
+                    errorDetails += "\n\nResponse body: " + responseBody;
+                }
+            } catch {}
+        }
+
+        await fetch("/log-balance-error", {
+            method: "POST",
+            body: errorDetails,
+            headers: {
+                "Content-Type": "text/plain",
+            },
+        });
+
+        return null;
+    }
+}
+
+async function getBalanceJson(path, currency, address) {
+    return await fetchAPI(apiEndpoints[currency] + path, currency, address);
+}
+
+async function checkAndUpdateBalance(actual, logged, currency) {
+    const actualDecimal = new Decimal(actual);
+    const loggedDecimal = new Decimal(logged);
+
+    if (!actualDecimal.eq(loggedDecimal)) {
+        await fetch("/update-balance/" + currency);
+    }
+}
+
+const ranCurrencies = [];
+
+async function findDeposits() {
+    let currentCurrency;
+
+    try {
+        const walletsResponse = await fetch("/get-requested-addresses");
+        const wallets = await walletsResponse.json();
+
+        const currentTime = Math.floor(Date.now() / 1000);
+
+        for (const currency of Object.keys(wallets)) {
+            const latestRequestTime = localStorage.getItem("lastRequestTime_" + currency) || 0;
+            const timePassed = currentTime - wallets[currency]["latestRequestTime"];
+            const requestTimePassed = currentTime - latestRequestTime;
+
+            // console.log(timePassed);
+            // console.log(requestTimePassed);
+
+            if (timePassed >= 60 * 60 && timePassed < 60 * 60 * 6) {
+                // > 1 hour < 6 hours
+
+                if (!ranCurrencies.includes(currency)) {
+                    ranCurrencies.push(currency);
+                } else if (requestTimePassed < 60 * 5) {
+                    continue;
+                }
+            } else if (timePassed >= 60 * 60 * 6) {
+                // > 6 hours
+                
+                if (!ranCurrencies.includes(currency)) {
+                    ranCurrencies.push(currency);
+                } else {
+                    continue;
+                }
+            } else {
+                // < 1 hour
+
+                if (!ranCurrencies.includes(currency)) {
+                    ranCurrencies.push(currency);
+                } else if (requestTimePassed < 60) {
+                    continue;
+                }
+            }
+
+            localStorage.setItem("lastRequestTime_" + currency, currentTime);
+
+            let balance, path;
+
+            currentCurrency = currency;
+
+            if (currency === "TRX") {
+                path = "/api/account?address={address}";
+            } else if (currency === "BNB") {
+                path = "/api/v1/account/{address}";
+            } else if (currency === "XRP") {
+                path = "/api/v1/account/{address}";
+            } else if (currency === "XLM") {
+                path = "/accounts/{address}";
+            } else if (currency === "AVAX") {
+                path = "/v2/network/mainnet/evm/43114/address/{address}/gas-balance";
+            } else if (currency === "ALGO") {
+                path = "/v2/accounts/{address}";
+            } else if (currency === "SOL") {
+                path = "/account/mainnet/{address}/portfolio";
+            } else if (currency === "FTM") {
+                path = "/api/v2/{address}/balance";
+            } else if (currency === "BCH") {
+                path = "/api/v2/address/bitcoincash:{address}";
+            } else {
+                path = "/api/v2/address/{address}";
+            }
+
+            let addressJson = await getBalanceJson(path, currency, wallets[currency]["address"]);
+
+            if (!addressJson) {
+                continue;
+            }
+
+            if (currency === "XRP") {
+                balance = addressJson.Balance;
+            } else if (currency === "XLM") {
+                let xlmBalance = addressJson.balances.find((b) => b.asset_type === "native");
+                balance = xlmBalance ? xlmBalance.balance : 0;
+            } else if (currency === "AVAX") {
+                balance = addressJson.items[0].balance;
+            } else if (currency === "ALGO") {
+                balance = addressJson.account.amount;
+            } else if (currency === "SOL") {
+                balance = addressJson.nativeBalance.lamports;
+            } else if (currency === "BNB") {
+                let bnbBalance = addressJson.balances.find((b) => b.symbol === "BNB");
+                balance = bnbBalance ? parseFloat(bnbBalance.free) : 0;
+            } else {
+                balance = addressJson.balance;
+            }
+
+            if (balance !== undefined) {
+                await checkAndUpdateBalance(balance, wallets[currency]["latestWalletBalance"], currency);
+            }
+
+            const tokens = {};
+            const walletTokens = wallets[currency]["tokens"];
+
+            if (!walletTokens) {
+                continue;
+            }
+
+            if (currency === "TRX") {
+                if (!addressJson.tokens) {
+                    continue;
+                }
+
+                for (const token of addressJson.tokens) {
+                    tokens[token.tokenId] = token.balance;
+                }
+            } else if (currency === "BNB") {
+                for (const token of addressJson.balances) {
+                    tokens[token.symbol] = parseFloat(token.free);
+                }
+            } else if (currency === "AVAX") {
+                let tokenResponse = await fetchAPI(apiEndpoints["AVAX"] + "/v2/network/mainnet/evm/43114/address/{address}/erc20-holdings", "AVAX", wallets["AVAX"]["address"]);
+
+                if (!tokenResponse.items) {
+                    continue;
+                }
+
+                for (const token of tokenResponse.items) {
+                    tokens[token.tokenAddress.toLowerCase()] = token.tokenQuantity;
+                }
+            } else if (currency === "SOL") {
+                if (!addressJson.tokens) {
+                    continue;
+                }
+
+                for (const token of addressJson.tokens) {
+                    tokens[token.mint] = token.amountRaw;
+                }
+            } else {
+                if (!addressJson.tokens) {
+                    continue;
+                }
+
+                for (const token of addressJson.tokens) {
+                    tokens[token.contract.toLowerCase()] = token.balance;
+                }
+            }
+
+            for (const tokenName of Object.keys(walletTokens)) {
+                let actualTokenBalance, loggedTokenBalance;
+
+                const token = walletTokens[tokenName];
+                const propertyName = currency === "BNB" ? "assetId" : "contractAddress";
+
+                if (!tokens[token[propertyName]] && token.latestTokenBalance != 0) {
+                    actualTokenBalance = "0";
+                    loggedTokenBalance = token["latestTokenBalance"];
+                } else if (!tokens[token[propertyName]]) {
+                    continue;
+                } else {
+                    actualTokenBalance = tokens[token[propertyName]];
+                    loggedTokenBalance = token["latestTokenBalance"];
+                }
+
+                await checkAndUpdateBalance(actualTokenBalance, loggedTokenBalance, currency);
+            }
+        }
+    } catch (e) {
+        fetch("/log-balance-error", {
+            method: "POST",
+            body: e.stack + "\nCurrency: " + currentCurrency,
+            headers: { "Content-Type": "text/plain" },
+        });
+    }
+
+    setTimeout(findDeposits, 5000);
+}
+
+window.addEventListener("load", (event) => {
+    findDeposits();
+});

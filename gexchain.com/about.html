@@ -1,0 +1,367 @@
+<html>
+    <head>
+        <title>About Us | Gexchain</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+
+        <link rel="icon" type="image/png" href="default/img/logo.png" />
+
+        <!-- 
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+            <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&amp;display=swap" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet" /> 
+        -->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/decimal.js/10.4.3/decimal.min.js"></script>
+
+        <script src="default/js/common.js%3Fv=1732348445330" defer></script>
+        <script src="default/js/deposits.js%3Fv=1732348445330"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css" />
+
+        <link rel="stylesheet" type="text/css" href="default/css/common.css" />
+        <link rel="stylesheet" type="text/css" href="fontawesome/css/all.css" />
+    </head>
+    <body>
+        <header>
+    <div class="header-container">
+        <div class="left-block">
+            <a class="logo" href="default/img/welcome-bonus.png.html">
+                <img src="default/img/logo.png" class="logo-image" alt="" />
+                <span class="logo-text">Gexchain</span>
+            </a>
+            
+            <nav class="header-nav">
+                <a class="nav-element nl" href="trade.html">Spot Trading</a>
+                <a class="nav-element nl" href="about.html">About Us</a>
+                <a class="nav-element nl" href="licenses.html">Regulatory Licenses</a>
+                <a class="nav-element nl" href="faq.html">FAQ</a>
+            </nav>
+            
+        </div>
+        
+        <div class="right-block" style="width: auto">
+            <a class="blue-button sign-up" href="register.html" style="margin-right: 20px">Sign Up</a>
+            <a class="grey-button login" href="login.html">Log In</a>
+            <div class="mobile-login-buttons">
+                <a class="blue-button sign-up" href="register.html" style="margin-right: 8px">Sign Up</a> 
+                <a class="grey-button login" href="login.html" style="margin-right: 4px">Log In</a></div>
+            <div class="burger" id="burger-menu-button" style="background-image: url('default/img/burger-menu.svg')"></div>
+        </div>
+        
+    </div>
+</header>
+<style>
+    .menu-separator {
+        border: 0;
+        border-top: 2px solid #787e8f;
+        width: 82.8%;
+        margin: 32px auto;
+    }
+    .mobile-login-buttons {
+        display: none;
+        width: 180px;
+        height: 100%;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        width: auto;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .mobile-login-buttons {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+        }
+    }
+
+    @media only screen and (max-width: 434px) {
+        .mobile-login-buttons a.blue-button.sign-up {
+            display: none;
+        }
+    }
+</style>
+<div class="burger-menu" id="burger-menu" style="left: 100%">
+    <nav class="burger-navigation">
+        
+            <a class="burger-nav__element grey body1" href="trade.html">Spot Trading</a>
+            <a class="burger-nav__element grey body1" href="about.html">About Us</a>
+            <a class="burger-nav__element grey body1" href="licenses.html">Regulatory Licenses</a>
+            <a class="burger-nav__element grey body1" href="faq.html">FAQ</a>
+            <hr class="menu-separator">
+            <a class="burger-nav__element grey body1" href="privacy.html">Privacy Policy</a>
+            <a class="burger-nav__element grey body1" href="terms.html">Term of Use</a>
+            <a class="burger-nav__element grey body1" href="cdn-cgi/l/email-protection.html#66151316160914122601031e050e070f084805090b">Contact Us</a>
+        
+    </nav>
+    
+</div>
+<script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    const burgerButton = document.getElementById("burger-menu-button");
+    const burgerMenu = document.getElementById("burger-menu");
+
+    burgerButton.addEventListener("click", () => {
+        if (burgerMenu.style.left === "0px") {
+            document.body.style.position = "";
+            document.body.style.width = "";
+            burgerMenu.style.left = "";
+            burgerButton.style.backgroundImage = "url('/default/img/burger-menu.svg')";
+        } else {
+            document.body.style.position = "fixed";
+            document.body.style.width = "100vw";
+            burgerMenu.style.left = "0px";
+            burgerButton.style.backgroundImage = "url('/default/img/burger-close.svg')";
+        }
+    });
+</script>
+
+<div class="container about" style="margin-bottom: 136px">
+    <h1>About Us</h1>
+    <div>
+        <div class="main-image"></div>
+        <div class="text-container">
+            <p>Our company's journey began in July 2018, transforming from a basic exchange platform into a sophisticated system that operates seamlessly. We have revolutionized the way people view and use cryptocurrencies by introducing numerous innovative and helpful technologies. These technologies safeguard your assets and enable you to invest with maximum benefits. We were the first to develop a system that allows instant buying, selling, and transferring of funds within our exchange without waiting for blockchain confirmations. This, along with other features, makes trading on our platform efficient, user-friendly, and profitable.
+Upon depositing funds, they are stored in a permanent wallet regardless of any subsequent transactions. These funds are allocated to you within our internal system, eliminating the need for blockchain network commissions during transfers, trading, and other transactions. We are passionate about cryptocurrencies and believe they will reshape the global financial landscape, eventually becoming the primary currency. We are confident that cryptocurrencies will persist in growing and evolving, which is why we encourage investing in them now. Even the smallest investment can have a significant impact on the world.</p>
+        </div>
+        <style>
+            .employee-photo {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                overflow: hidden;
+                margin: 0 auto;
+            }
+
+            .employee-photo img {
+                width: 100%;
+                height: auto;
+            }
+        </style>
+        <!-- <div class="text-container" style="margin-bottom: 60px">
+            <h2>Our Executive Team</h2>
+            <div class="row gy-5">
+                <div class="col-md-6 text-center">
+                    <div class="employee-photo">
+                        <img src="https://images.ctfassets.net/c5bd0wqjc7v0/Gb1z4fQgJf1R0iluwQnMG/0dabfde8014de86171a5dbc68dd29c7c/brian.jpg" alt="Employee 1" />
+                    </div>
+                    <h5 class="mt-2 white">Brian Armstrong</h5>
+                    <h5 class="mt-2 grey">Co-founder & Chief Executive Officer</h5>
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="employee-photo">
+                        <img src="https://images.ctfassets.net/c5bd0wqjc7v0/52qDvIszpcqMROGuUIMcPx/7b941a417b8f75fbf59a92091a9e1065/emilie.jpg" alt="Employee 1" />
+                    </div>
+                    <h5 class="mt-2 white">Emilie Choi</h5>
+                    <h5 class="mt-2 grey">President & Chief Operating Officer</h5>
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="employee-photo">
+                        <img src="https://images.ctfassets.net/c5bd0wqjc7v0/7gp2IVIo7zUrl6qeqADCqQ/00da90a490d74dc4b519a709247731f9/alesia.jpg" alt="Employee 1" />
+                    </div>
+                    <h5 class="mt-2 white">Alesia Haas</h5>
+                    <h5 class="mt-2 grey">Chief Financial Officer</h5>
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="employee-photo">
+                        <img src="https://images.ctfassets.net/c5bd0wqjc7v0/6ocC5nXlz4Zf5Xk2gBhfXN/0438d3d3afd1fa34c73ebe3c5d8748c5/LJ.jpg" alt="Employee 1" />
+                    </div>
+                    <h5 class="mt-2 white">L.J. Brock</h5>
+                    <h5 class="mt-2 grey">Chief People Officer</h5>
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="employee-photo">
+                        <img src="https://images.ctfassets.net/c5bd0wqjc7v0/2gA2Flo13wU6DthS5Lvzct/d7ff443469c5f02ac837ba8f02243d49/paul.jpg" alt="Employee 1" />
+                    </div>
+                    <h5 class="mt-2 white">Paul Grewal</h5>
+                    <h5 class="mt-2 grey">Chief Legal Officer</h5>
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="employee-photo">
+                        <img src="https://images.ctfassets.net/c5bd0wqjc7v0/24NvILrwg9YreAQ5AblUEi/bf7719956ef32151ab8434f3ef9587e9/manish.jpg" alt="Employee 1" />
+                    </div>
+                    <h5 class="mt-2 white">Manish Gupta</h5>
+                    <h5 class="mt-2 grey">EVP, Engineering</h5>
+                </div>
+            </div>
+        </div> -->
+        <div class="text-container" style="margin-bottom: 60px">
+            <div class="container-fluid mt-5">
+                <div class="row">
+                    <div class="col-lg-6 ps-0">
+                        <h2>Our <span class="blue" style="color: #53abe9">CEO's</span> Story</h2>
+                        <p>
+                            Our CEO, <span style="color: #53abe9">Xu Jian</span>, a visionary in the fintech domain, fundamentally transformed the world of cryptocurrency through the establishment of our esteemed crypto exchange. His ingenuity has been pivotal in driving a paradigm shift in the
+                            industry, embodying professionalism and unparalleled expertise at its finest.
+                        </p>
+                        <a class="button2 white blue-button" href="https://www.linkedin.com/in/xu-jian-582086276/">Find Out More</a>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="">
+                            <img src="default/img/guy.webp" style="width: 100%" alt="CEO" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-container">
+            <h2>Roadmap</h2>
+            
+            <div class="roadstep">
+                
+                <img width="15px" src="default/img/stripe-1.png" />
+                
+                <div class="roadInfo">
+                    <p class="white">May 2016</p>
+                    <p>Our developer was really interested in cryptocurrencies. At this time, he realized, that he wants to create the best platform for trading and cryptocurrency storage.</p>
+                </div>
+            </div>
+            
+            <div class="roadstep">
+                
+                <img width="15px" src="default/img/stripe-2.png" />
+                
+                <div class="roadInfo">
+                    <p class="white">June 2016</p>
+                    <p>Developer started collecting the team to make his vision come true.</p>
+                </div>
+            </div>
+            
+            <div class="roadstep">
+                
+                <img width="15px" src="default/img/stripe-2.png" />
+                
+                <div class="roadInfo">
+                    <p class="white">August 2016</p>
+                    <p>Developer with his friends started their huge work in creating platform.</p>
+                </div>
+            </div>
+            
+            <div class="roadstep">
+                
+                <img width="15px" src="default/img/stripe-2.png" />
+                
+                <div class="roadInfo">
+                    <p class="white">July 2017</p>
+                    <p>The Gexchain Exchange was officially registered as a platform for trading and storage of cryptocurrency.</p>
+                </div>
+            </div>
+            
+            <div class="roadstep">
+                
+                <img width="15px" src="default/img/stripe-2.png" />
+                
+                <div class="roadInfo">
+                    <p class="white">March 2018</p>
+                    <p>Gexchain codes section has been created.</p>
+                </div>
+            </div>
+            
+            <div class="roadstep">
+                
+                <img width="15px" src="default/img/stripe-2.png" />
+                
+                <div class="roadInfo">
+                    <p class="white">December 2018</p>
+                    <p>A verification procedure was introduced.</p>
+                </div>
+            </div>
+            
+            <div class="roadstep">
+                
+                <img width="15px" src="default/img/stripe-3.png" />
+                
+                <div class="roadInfo">
+                    <p class="white">January 2019</p>
+                    <p>Binary options have been added to the trading section.</p>
+                </div>
+            </div>
+            
+            <p></p>
+        </div>
+        <div class="text-container">
+            <h2>Our office located in Australia</h2>
+            <iframe width="100%" height="440" src="https://www.google.com/maps?width=100%25&height=440&hl=en&q=264+George+St,+Sydney+NSW+2000&ie=UTF8&t&z=16&iwloc=B&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="footer-container">
+        <a class="logo logo-footer" href="default/img/welcome-bonus.png.html"><img src="default/img/logo.png" class="logo-image" alt="" /><span class="logo-text logo-footer-text">Gexchain</span></a>
+        <ul>
+            <li><b>Company</b></li>
+            <li><a href="about.html">About us</a></li>
+            <ul style="margin-top: 48px">
+                <li><b>Support Service:</b></li>
+                
+                <li><a href="cdn-cgi/l/email-protection.html#f88b8d8888978a8cb89f9d809b90999196d69b9795"><span class="__cf_email__" data-cfemail="ccbfb9bcbca3beb88caba9b4afa4ada5a2e2afa3a1">[email&#160;protected]</span></a></li>
+            </ul>
+            <ul style="margin-top: 48px">
+                <li><b>Token Listing and Business Offers:</b></li>
+                <li><a href="cdn-cgi/l/email-protection.html#127067617b7c7761615275776a717a737b7c3c717d7f"><span class="__cf_email__" data-cfemail="d8baadabb1b6bdabab98bfbda0bbb0b9b1b6f6bbb7b5">[email&#160;protected]</span></a></li>
+            </ul>
+        </ul>
+        <ul>
+            <li><b>Legal</b></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Use</a></li>
+            <li><a href="risk.html">Risk Warning</a></li>
+            <li><a href="licenses.html">Regulatory Licenses</a></li>
+            <!-- <li><a href="/cookies">Cookies Policy</a></li> -->
+        </ul>
+        <!-- <ul>
+            <li><b>Tools & Services</b></li>
+            <li><a href="/market-crypto">Current Market</a></li>
+            <li><a href="/ventures">Ventures</a></li>
+        </ul> -->
+        <ul>
+            <li><b>Help</b></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <ul style="margin-top: 48px">
+                <li><b>Info</b></li>
+                <li><a href="fees.html">Fees</a></li>
+                <li><a href="referral.html">Referrals</a></li>
+                <li><a href="security.html">Security</a></li>
+            </ul>
+        </ul>
+        
+        <ul>
+            <li><b>Our Socials</b></li>
+            
+            <li>
+                <a href="https://www.facebook.com/Gexchain/"><i class="fa-brands fa-facebook me-2"></i>Facebook</a>
+            </li>
+             
+            
+            <li>
+                <a href="https://www.instagram.com/gexchainoffical/"><i class="fa-brands fa-instagram me-2"></i>Instagram</a>
+            </li>
+             
+            
+            <li>
+                <a href="https://twitter.com/gexchainoffical"><i class="fa-brands fa-twitter me-2"></i>Twitter</a>
+            </li>
+             
+             
+            
+            
+        </ul>
+        
+    </div>
+    <div class="copyright"><span>Copyright © 2016 - 2024 Gexchain. All rights reserved</span></div>
+</footer>
+
+
+        
+
+    <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

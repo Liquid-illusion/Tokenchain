@@ -1,0 +1,679 @@
+<html>
+    <head>
+        <title>Home | Gexchain</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+
+        <link rel="icon" type="image/png" href="default/img/logo.png" />
+
+        <!-- 
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+            <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&amp;display=swap" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet" /> 
+        -->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/decimal.js/10.4.3/decimal.min.js"></script>
+
+        <script src="default/js/common.js%3Fv=1732348442040" defer></script>
+        <script src="default/js/deposits.js%3Fv=1732348442040"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css" />
+
+        <link rel="stylesheet" type="text/css" href="default/css/common.css" />
+        <link rel="stylesheet" type="text/css" href="fontawesome/css/all.css" />
+    </head>
+    <body>
+        <header>
+    <div class="header-container">
+        <div class="left-block">
+            <a class="logo" href="default/img/welcome-bonus.png.html">
+                <img src="default/img/logo.png" class="logo-image" alt="" />
+                <span class="logo-text">Gexchain</span>
+            </a>
+            
+            <nav class="header-nav">
+                <a class="nav-element nl" href="trade.html">Spot Trading</a>
+                <a class="nav-element nl" href="about.html">About Us</a>
+                <a class="nav-element nl" href="licenses.html">Regulatory Licenses</a>
+                <a class="nav-element nl" href="faq.html">FAQ</a>
+            </nav>
+            
+        </div>
+        
+        <div class="right-block" style="width: auto">
+            <a class="blue-button sign-up" href="register.html" style="margin-right: 20px">Sign Up</a>
+            <a class="grey-button login" href="login.html">Log In</a>
+            <div class="mobile-login-buttons">
+                <a class="blue-button sign-up" href="register.html" style="margin-right: 8px">Sign Up</a> 
+                <a class="grey-button login" href="login.html" style="margin-right: 4px">Log In</a></div>
+            <div class="burger" id="burger-menu-button" style="background-image: url('default/img/burger-menu.svg')"></div>
+        </div>
+        
+    </div>
+</header>
+<style>
+    .menu-separator {
+        border: 0;
+        border-top: 2px solid #787e8f;
+        width: 82.8%;
+        margin: 32px auto;
+    }
+    .mobile-login-buttons {
+        display: none;
+        width: 180px;
+        height: 100%;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        width: auto;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .mobile-login-buttons {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+        }
+    }
+
+    @media only screen and (max-width: 434px) {
+        .mobile-login-buttons a.blue-button.sign-up {
+            display: none;
+        }
+    }
+</style>
+<div class="burger-menu" id="burger-menu" style="left: 100%">
+    <nav class="burger-navigation">
+        
+            <a class="burger-nav__element grey body1" href="trade.html">Spot Trading</a>
+            <a class="burger-nav__element grey body1" href="about.html">About Us</a>
+            <a class="burger-nav__element grey body1" href="licenses.html">Regulatory Licenses</a>
+            <a class="burger-nav__element grey body1" href="faq.html">FAQ</a>
+            <hr class="menu-separator">
+            <a class="burger-nav__element grey body1" href="privacy.html">Privacy Policy</a>
+            <a class="burger-nav__element grey body1" href="terms.html">Term of Use</a>
+            <a class="burger-nav__element grey body1" href="cdn-cgi/l/email-protection.html#ec9f999c9c839e98ac8b89948f848d8582c28f8381">Contact Us</a>
+        
+    </nav>
+    
+</div>
+<script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    const burgerButton = document.getElementById("burger-menu-button");
+    const burgerMenu = document.getElementById("burger-menu");
+
+    burgerButton.addEventListener("click", () => {
+        if (burgerMenu.style.left === "0px") {
+            document.body.style.position = "";
+            document.body.style.width = "";
+            burgerMenu.style.left = "";
+            burgerButton.style.backgroundImage = "url('/default/img/burger-menu.svg')";
+        } else {
+            document.body.style.position = "fixed";
+            document.body.style.width = "100vw";
+            burgerMenu.style.left = "0px";
+            burgerButton.style.backgroundImage = "url('/default/img/burger-close.svg')";
+        }
+    });
+</script>
+
+
+<script>
+    let binanceAddress = "binance.com";
+    let binanceSocketAddress = "binance.com";
+
+    const ipCountry = "AU";
+    const userCountry = "";
+
+    if (ipCountry) {
+        if (ipCountry === "US" || ipCountry === "UM") {
+            binanceAddress = "binance.us";
+            binanceSocketAddress = "binance.us:9443";
+        }
+    } else if (userCountry) {
+        if (userCountry === "US" || userCountry === "UM") {
+            binanceAddress = "binance.us";
+            binanceSocketAddress = "binance.us:9443";
+        }
+    }
+</script>
+
+
+<div class="container home-not-login">
+    <div class="owl-carousel owl-theme">
+        <div class="item">
+            <div tabindex="-1" style="width: 100%; display: inline-block">
+                <div class="hero-header">
+                    <div class="hero-header__text">
+                        <h1>Be calm about your cryptocurrency assets</h1>
+                        <p>After all, our exchange is the best way to receive, send and trade cryptocurrency</p>
+                        <a class="blue-button hero-header__button" href="register.html">Sign Up</a>
+                    </div>
+                    <img src="default/img/wallet.png" alt="" />
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div tabindex="-1" style="width: 100%; display: inline-block">
+                <div class="hero-header">
+                    <div class="hero-header__text">
+                        <h1>Trading on a leading exchange</h1>
+                        <p>Fast transactions, minimal fees, many different currencies, simple and intuitive functionality</p>
+                        <a class="blue-button hero-header__button" href="register.html">Sign Up</a>
+                    </div>
+                    <img src="default/img/trading.png" alt="padding: 40px;" />
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div tabindex="-1" style="width: 100%; display: inline-block">
+                <div class="hero-header">
+                    <div class="hero-header__text">
+                        <h1>You are always safe with us</h1>
+                        <p>Zero hacks in the history of the exchange, two-factor authentication and enhanced encryption of your transaction data</p>
+                        <a class="blue-button hero-header__button" href="register.html">Sign Up</a>
+                    </div>
+                    <img src="default/img/eth-safe.png" alt="" />
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div tabindex="-1" style="width: 100%; display: inline-block">
+                <div class="hero-header">
+                    <div class="hero-header__text">
+                        <h1>Professional technical support</h1>
+                        <p>A team of specialists available around the clock to answer any questions you may have</p>
+                        <a class="blue-button hero-header__button" href="register.html">Sign Up</a>
+                    </div>
+                    <img src="default/img/support.png" alt="" />
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div tabindex="-1" style="width: 100%; display: inline-block">
+                <div class="hero-header">
+                    <div class="hero-header__text">
+                        <h1>Platform volumes</h1>
+                        <p>With a trading volume of $137 billion and the most popular pair being BTC/USD ($42 billion), our exchange is one of the largest in the world</p>
+                        <a class="blue-button hero-header__button" href="register.html">Sign Up</a>
+                    </div>
+                    <img src="default/img/volumes.png" alt="padding: 40px;" />
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div tabindex="-1" style="width: 100%; display: inline-block">
+                <div class="hero-header">
+                    <div class="hero-header__text">
+                        <h1>Explore the world of cryptocurrency</h1>
+                        <p>150+ countries trust us and trade with us</p>
+                        <a class="blue-button hero-header__button" href="register.html">Sign Up</a>
+                    </div>
+                    <img src="default/img/world.png" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="market-trend">
+        <div class="market-trend__top">
+            <h2>Market trend</h2>
+            <a class="grey-button view-more" href="trade.html">View more</a>
+        </div>
+        <div class="table" id="pc-table">
+            <div class="string">
+                <div class="second-el grey">Name</div>
+                <div class="third-el grey">Price</div>
+                <div class="fourth-el grey">24h change</div>
+                <div class="fifth-el grey">Chart</div>
+                <div class="sixth-el grey">Trade</div>
+            </div>
+            <div class="string table-currency" data-pair="BTCUSDT">
+                <div class="second-el white"><img src="currencies/btc.svg" class="main-trend-logo" alt="BTC" />Bitcoin <span>BTC</span></div>
+                <div class="third-el white"></div>
+                <div class="fourth-el"></div>
+                <div class="fifth-el">
+                    <div style="text-align: left; height: 60px; width: 160px">
+                        <canvas role="img" height="45" width="140" data-pair="BTCUSDT" data-color="#F7931A"></canvas>
+                    </div>
+                </div>
+                <div class="sixth-el">
+                    <a class="grey-button" href="trade/index.html">Trade</a>
+                </div>
+            </div>
+            <div class="string table-currency" data-pair="ETHUSDT">
+                <div class="second-el white"><img src="currencies/eth.svg" class="main-trend-logo" alt="ETH" />Ethereum <span>ETH</span></div>
+                <div class="third-el white"></div>
+                <div class="fourth-el"></div>
+                <div class="fifth-el">
+                    <div style="text-align: left; height: 60px; width: 160px">
+                        <canvas role="img" height="45" width="140" data-pair="ETHUSDT" data-color="#627EEA"></canvas>
+                    </div>
+                </div>
+                <div class="sixth-el">
+                    <a class="grey-button" href="trade/ETH/USDT.html">Trade</a>
+                </div>
+            </div>
+            <div class="string table-currency" data-pair="LTCUSDT">
+                <div class="second-el white"><img src="currencies/ltc.svg" class="main-trend-logo" alt="LTC" />Litecoin <span>LTC</span></div>
+                <div class="third-el white"></div>
+                <div class="fourth-el"></div>
+                <div class="fifth-el">
+                    <div style="text-align: left; height: 60px; width: 160px">
+                        <canvas role="img" height="45" width="140" data-pair="LTCUSDT" data-color="#345D9D"></canvas>
+                    </div>
+                </div>
+                <div class="sixth-el">
+                    <a class="grey-button" href="trade/LTC/USDT.html">Trade</a>
+                </div>
+            </div>
+            <div class="string table-currency" data-pair="DOGEUSDT">
+                <div class="second-el white"><img src="currencies/doge.svg" class="main-trend-logo" alt="DOGE" />Dogecoin <span>DOGE</span></div>
+                <div class="third-el white"></div>
+                <div class="fourth-el"></div>
+                <div class="fifth-el">
+                    <div style="text-align: left; height: 60px; width: 160px">
+                        <canvas role="img" height="45" width="140" data-pair="DOGEUSDT" data-color="#BA9F33"></canvas>
+                    </div>
+                </div>
+                <div class="sixth-el">
+                    <a class="grey-button" href="trade/DOGE/USDT.html">Trade</a>
+                </div>
+            </div>
+            <div class="string table-currency" data-pair="TRXUSDT">
+                <div class="second-el white"><img src="currencies/trx.svg" class="main-trend-logo" alt="TRX" />Tron <span>TRX</span></div>
+                <div class="third-el white"></div>
+                <div class="fourth-el"></div>
+                <div class="fifth-el">
+                    <div style="text-align: left; height: 60px; width: 160px">
+                        <canvas role="img" height="45" width="140" data-pair="TRXUSDT" data-color="#FF060A"></canvas>
+                    </div>
+                </div>
+                <div class="sixth-el">
+                    <a class="grey-button" href="trade/TRX/USDT.html">Trade</a>
+                </div>
+            </div>
+            <div class="string table-currency" data-pair="MATICUSDT">
+                <div class="second-el white"><img src="currencies/matic.svg" class="main-trend-logo" alt="MATIC" />Polygon <span>MATIC</span></div>
+                <div class="third-el white"></div>
+                <div class="fourth-el"></div>
+                <div class="fifth-el">
+                    <div style="text-align: left; height: 60px; width: 160px">
+                        <canvas role="img" height="45" width="140" data-pair="MATICUSDT" data-color="#803BD1"></canvas>
+                    </div>
+                </div>
+                <div class="sixth-el">
+                    <a class="grey-button" href="trade/MATIC/USDT.html">Trade</a>
+                </div>
+            </div>
+            <div class="string table-currency" data-pair="SHIBUSDT">
+                <div class="second-el white"><img src="currencies/shib.svg" class="main-trend-logo" alt="SHIB" />Shiba Inu <span>SHIB</span></div>
+                <div class="third-el white"></div>
+                <div class="fourth-el"></div>
+                <div class="fifth-el">
+                    <div style="text-align: left; height: 60px; width: 160px">
+                        <canvas role="img" height="45" width="140" data-pair="SHIBUSDT" data-color="#FFA409"></canvas>
+                    </div>
+                </div>
+                <div class="sixth-el">
+                    <a class="grey-button" href="trade/SHIB/USDT.html">Trade</a>
+                </div>
+            </div>
+        </div>
+        <div class="table" style="display: none" id="phone-table">
+            <div class="d-flex mb-4" data-pair="BTCUSDT">
+                <div style="width: 25%">
+                    <img src="currencies/btc.svg" class="main-trend-logo" alt="BTC" />
+                </div>
+                <div style="width: 50%">
+                    <div>
+                        <div class="white">Bitcoin <span>BTC</span></div>
+                    </div>
+                    <div>
+                        <div class="white price"></div>
+                    </div>
+                </div>
+                <div style="width: 25%">
+                    <div class="price"></div>
+                </div>
+            </div>
+            <div class="d-flex mb-4" data-pair="ETHUSDT">
+                <div style="width: 25%">
+                    <img src="currencies/eth.svg" class="main-trend-logo" alt="ETH" />
+                </div>
+                <div style="width: 50%">
+                    <div>
+                        <div class="white">Ethereum <span>ETH</span></div>
+                    </div>
+                    <div>
+                        <div class="white price"></div>
+                    </div>
+                </div>
+                <div style="width: 25%">
+                    <div class="red price"></div>
+                </div>
+            </div>
+            <div class="d-flex mb-4" data-pair="LTCUSDT">
+                <div style="width: 25%">
+                    <img src="currencies/ltc.svg" class="main-trend-logo" alt="LTC" />
+                </div>
+                <div style="width: 50%">
+                    <div>
+                        <div class="white">Litecoin <span>LTC</span></div>
+                    </div>
+                    <div>
+                        <div class="white price"></div>
+                    </div>
+                </div>
+                <div style="width: 25%">
+                    <div class="price"></div>
+                </div>
+            </div>
+            <div class="d-flex mb-4" data-pair="DOGEUSDT">
+                <div style="width: 25%">
+                    <img src="currencies/doge.svg" class="main-trend-logo" alt="DOGE" />
+                </div>
+                <div style="width: 50%">
+                    <div>
+                        <div class="white">Dogecoin <span>DOGE</span></div>
+                    </div>
+                    <div>
+                        <div class="white price"></div>
+                    </div>
+                </div>
+                <div style="width: 25%">
+                    <div class="price"></div>
+                </div>
+            </div>
+            <div class="d-flex mb-4" data-pair="TRXUSDT">
+                <div style="width: 25%">
+                    <img src="currencies/trx.svg" class="main-trend-logo" alt="TRX" />
+                </div>
+                <div style="width: 50%">
+                    <div>
+                        <div class="white">Tron <span>TRX</span></div>
+                    </div>
+                    <div>
+                        <div class="white price"></div>
+                    </div>
+                </div>
+                <div style="width: 25%">
+                    <div class="price"></div>
+                </div>
+            </div>
+            <div class="d-flex mb-4" data-pair="MATICUSDT">
+                <div style="width: 25%">
+                    <img src="currencies/matic.svg" class="main-trend-logo" alt="MATIC" />
+                </div>
+                <div style="width: 50%">
+                    <div>
+                        <div class="white">Polygon <span>MATIC</span></div>
+                    </div>
+                    <div>
+                        <div class="white price"></div>
+                    </div>
+                </div>
+                <div style="width: 25%">
+                    <div class="price"></div>
+                </div>
+            </div>
+            <div class="d-flex mb-4" data-pair="SHIBUSDT">
+                <div style="width: 25%">
+                    <img src="currencies/shib.svg" class="main-trend-logo" alt="SHIB" />
+                </div>
+                <div style="width: 50%">
+                    <div>
+                        <div class="white">Shiba Inu <span>SHIB</span></div>
+                    </div>
+                    <div>
+                        <div class="white price"></div>
+                    </div>
+                </div>
+                <div style="width: 25%">
+                    <div class="price"></div>
+                </div>
+            </div>
+        </div>
+        <a class="grey-button view-more-mobile" href="trade/index.html">View more</a>
+    </div>
+    <div class="how-it-works">
+        <h2>How it works</h2>
+        <div class="scroll-wrapper">
+            <div class="scrollable">
+                <img src="default/img/how-it-works.png" width="1120px" class="icons_line" alt="" />
+                <div class="scroll-wrapper__text">
+                    <div class="text__block">
+                        <h6>Step 1</h6>
+                        <img src="default/img/register.webp" alt="" class="simple_icon" />
+                        <span>Register</span>
+                        <p>Registration is a very easy process. Follow step by step and sign in.</p>
+                    </div>
+                    <div class="text__block">
+                        <h6>Step 2</h6>
+                        <img src="default/img/trading.webp" alt="" class="simple_icon" />
+                        <span>Start trading</span>
+                        <p>We support all types of cryptocurrency.</p>
+                    </div>
+                    <div class="text__block">
+                        <h6>Step 3</h6>
+                        <img src="default/img/discount.webp" alt="" class="simple_icon" />
+                        <span>Type promo code</span>
+                        <p>Use promocode to encrease your income.</p>
+                    </div>
+                    <div class="text__block">
+                        <h6>Step 4</h6>
+                        <img src="default/img/money.webp" alt="" class="simple_icon" />
+                        <span>Earn money</span>
+                        <p>Earn money on our platform safely and legally.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
+
+<script>
+    $(".owl-carousel").owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: false,
+        dots: true,
+        items: 1,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        utoplayHoverPause: true,
+    });
+
+    const tableElementsPC = document.getElementsByClassName("table-currency");
+    const tableElementsPhone = document.getElementsByClassName("d-flex");
+
+    const updatePriceAndChange = (element, priceNode, changeNode, pair, domainQuotes) => {
+        // return null;
+        fetch("https://api." + binanceAddress + "/api/v3/ticker/24hr?symbol=" + pair)
+            .then((res) => res.json())
+            .then((data) => {
+                priceNode.innerHTML = "$" + (parseFloat(data.lastPrice * (domainQuotes[pair] || 1)) > 1 ? parseFloat(data.lastPrice * (domainQuotes[pair] || 1)).toFixed(2) : parseFloat(data.lastPrice * (domainQuotes[pair] || 1)));
+                changeNode.innerHTML = parseFloat(data.priceChangePercent).toFixed(2) + "%";
+                if (data.priceChangePercent > 0) {
+                    changeNode.classList.add("green");
+                } else {
+                    changeNode.classList.add("red");
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
+    const domainQuotes = JSON.parse(`{}`);
+
+    for (const element of tableElementsPC) {
+        const pair = element.getAttribute("data-pair");
+        const priceNode = element.childNodes[3];
+        const changeNode = element.childNodes[5];
+
+        if (document.body.clientWidth > 768) {
+            updatePriceAndChange(element, priceNode, changeNode, pair, domainQuotes);
+        }
+    }
+
+    for (const element of tableElementsPhone) {
+        const pair = element.getAttribute("data-pair");
+        const priceNode = element.childNodes[3].childNodes[3].childNodes[1];
+        const changeNode = element.childNodes[5].childNodes[1];
+
+        if (document.body.clientWidth <= 768) {
+            updatePriceAndChange(element, priceNode, changeNode, pair, domainQuotes);
+        }
+    }
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.umd.js"></script>
+
+<script>
+    async function createChart(element, symbol, color) {
+        const response = await fetch("https://api." + binanceAddress + "/api/v3/klines?symbol=" + symbol + "&interval=1d&limit=30");
+
+        const ctx = element.getContext("2d");
+
+        const gradient = ctx.createLinearGradient(0, 0, 0, 50);
+        gradient.addColorStop(0, color + "70");
+        gradient.addColorStop(1, "transparent");
+
+        new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: Array.from({ length: 30 }, (_, i) => i),
+                datasets: [
+                    {
+                        backgroundColor: gradient,
+                        fill: true,
+                        data: (await response.json()).map((item) => parseFloat(item[4])),
+                        borderColor: color,
+                    },
+                ],
+            },
+            options: {
+                plugins: {
+                    legend: false,
+                },
+                scales: {
+                    y: {
+                        display: false,
+                    },
+                    x: {
+                        display: false,
+                    },
+                },
+                elements: {
+                    point: {
+                        radius: 0,
+                    },
+                    line: {
+                        tension: 0.5,
+                    },
+                },
+                events: [],
+            },
+        });
+    }
+
+    for (const element of document.querySelectorAll("canvas")) {
+        createChart(element, element.getAttribute("data-pair"), element.getAttribute("data-color"));
+    }
+</script>
+<footer>
+    <div class="footer-container">
+        <a class="logo logo-footer" href="default/img/welcome-bonus.png.html"><img src="default/img/logo.png" class="logo-image" alt="" /><span class="logo-text logo-footer-text">Gexchain</span></a>
+        <ul>
+            <li><b>Company</b></li>
+            <li><a href="about.html">About us</a></li>
+            <ul style="margin-top: 48px">
+                <li><b>Support Service:</b></li>
+                
+                <li><a href="cdn-cgi/l/email-protection.html#d4a7a1a4a4bba6a094b3b1acb7bcb5bdbafab7bbb9"><span class="__cf_email__" data-cfemail="5a292f2a2a35282e1a3d3f2239323b333474393537">[email&#160;protected]</span></a></li>
+            </ul>
+            <ul style="margin-top: 48px">
+                <li><b>Token Listing and Business Offers:</b></li>
+                <li><a href="cdn-cgi/l/email-protection.html#9ffdeaecf6f1faececdff8fae7fcf7fef6f1b1fcf0f2"><span class="__cf_email__" data-cfemail="0c6e797f6562697f7f4c6b69746f646d6562226f6361">[email&#160;protected]</span></a></li>
+            </ul>
+        </ul>
+        <ul>
+            <li><b>Legal</b></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Use</a></li>
+            <li><a href="risk.html">Risk Warning</a></li>
+            <li><a href="licenses.html">Regulatory Licenses</a></li>
+            <!-- <li><a href="/cookies">Cookies Policy</a></li> -->
+        </ul>
+        <!-- <ul>
+            <li><b>Tools & Services</b></li>
+            <li><a href="/market-crypto">Current Market</a></li>
+            <li><a href="/ventures">Ventures</a></li>
+        </ul> -->
+        <ul>
+            <li><b>Help</b></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <ul style="margin-top: 48px">
+                <li><b>Info</b></li>
+                <li><a href="fees.html">Fees</a></li>
+                <li><a href="referral.html">Referrals</a></li>
+                <li><a href="security.html">Security</a></li>
+            </ul>
+        </ul>
+        
+        <ul>
+            <li><b>Our Socials</b></li>
+            
+            <li>
+                <a href="https://www.facebook.com/Gexchain/"><i class="fa-brands fa-facebook me-2"></i>Facebook</a>
+            </li>
+             
+            
+            <li>
+                <a href="https://www.instagram.com/gexchainoffical/"><i class="fa-brands fa-instagram me-2"></i>Instagram</a>
+            </li>
+             
+            
+            <li>
+                <a href="https://twitter.com/gexchainoffical"><i class="fa-brands fa-twitter me-2"></i>Twitter</a>
+            </li>
+             
+             
+            
+            
+        </ul>
+        
+    </div>
+    <div class="copyright"><span>Copyright © 2016 - 2024 Gexchain. All rights reserved</span></div>
+</footer>
+
+<style>
+    @media screen and (max-width: 768px) {
+        #pc-table {
+            display: none;
+        }
+
+        #phone-table {
+            display: block !important;
+        }
+    }
+</style>
+
+        
+
+    <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

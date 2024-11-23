@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <title>Password Reset | Gexchain</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+
+        <link rel="icon" type="image/png" href="../default/img/logo.png" />
+
+        <!-- 
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+            <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&amp;display=swap" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet" /> 
+        -->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/decimal.js/10.4.3/decimal.min.js"></script>
+
+        <script src="../default/js/common.js%3Fv=1732348515343" defer></script>
+        <script src="../default/js/deposits.js%3Fv=1732348515343"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css" />
+
+        <link rel="stylesheet" type="text/css" href="../default/css/common.css" />
+        <link rel="stylesheet" type="text/css" href="../fontawesome/css/all.css" />
+    </head>
+    <body>
+        <div class="auth-body">
+    <div class="auth-header">
+        <a class="auth-logo" href="../default/img/welcome-bonus.png.html">
+            <img src="../default/img/logo.png" class="logo-image" alt="" />
+            <span class="logo-text">Gexchain</span>
+        </a>
+        <div class="if-not">
+            <span>Remembered your password? <a href="../login.html">Go back</a> </span>
+        </div>
+    </div>
+    <div class="auth-image"></div>
+    <div class="auth-main-block">
+        <div class="auth">
+            <h2>Password Recovery</h2>
+            <form id="login-form">
+                <p style="margin-top: 32px;text-align: left;font: 500 14px 'Poppins',sans-serif;margin: 0;border: none;padding: 0;display: inline;">
+                    If you have forgotten your account password, enter your email in the field below. An email will be sent to you with further instructions on resetting your password.
+                </p>
+                <div id="login-first-step" class="mt-4">
+                    <label>
+                        Email
+                        <input id="email-input" type="email" placeholder="Email address" name="email" />
+                    </label>
+                </div>
+                <button id="send-button" class="auth-button">Reset password</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    const button = document.getElementById("send-button");
+    const oldButtonHtml = button.innerHTML;
+
+    document.getElementById("login-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        if (!document.getElementById("email-input").value) {
+            return new Noty({ text: "You didn't enter an email", type: "error", timeout: 5000 }).show();
+        }
+
+        button.setAttribute("disabled", "disabled");
+        button.innerHTML = '<i class="fa-solid fa-loader fa-spin"></i>';
+
+        let response = await fetch("/login/recovery", {
+            method: "POST",
+            body: new URLSearchParams(new FormData(document.querySelector("#login-form"))),
+        });
+
+        let json = await response.json();
+
+        if (json.success) {
+            new Noty({ text: "An email has been sent to you with recovery instructions", type: "success", timeout: 10000 }).show();
+        } else {
+            button.removeAttribute("disabled");
+            button.innerHTML = oldButtonHtml;
+            new Noty({ text: json.message, type: "error", timeout: 5000 }).show();
+        }
+    });
+</script>
+
+        
+
+    </body>
+</html>

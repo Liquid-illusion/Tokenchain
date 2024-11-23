@@ -1,0 +1,218 @@
+<html>
+    <head>
+        <title>Risk Warning | Gexchain</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+
+        <link rel="icon" type="image/png" href="default/img/logo.png" />
+
+        <!-- 
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+            <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&amp;display=swap" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet" /> 
+        -->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/decimal.js/10.4.3/decimal.min.js"></script>
+
+        <script src="default/js/common.js%3Fv=1732348462015" defer></script>
+        <script src="default/js/deposits.js%3Fv=1732348462015"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css" />
+
+        <link rel="stylesheet" type="text/css" href="default/css/common.css" />
+        <link rel="stylesheet" type="text/css" href="fontawesome/css/all.css" />
+    </head>
+    <body>
+        <header>
+    <div class="header-container">
+        <div class="left-block">
+            <a class="logo" href="default/img/welcome-bonus.png.html">
+                <img src="default/img/logo.png" class="logo-image" alt="" />
+                <span class="logo-text">Gexchain</span>
+            </a>
+            
+            <nav class="header-nav">
+                <a class="nav-element nl" href="trade.html">Spot Trading</a>
+                <a class="nav-element nl" href="about.html">About Us</a>
+                <a class="nav-element nl" href="licenses.html">Regulatory Licenses</a>
+                <a class="nav-element nl" href="faq.html">FAQ</a>
+            </nav>
+            
+        </div>
+        
+        <div class="right-block" style="width: auto">
+            <a class="blue-button sign-up" href="register.html" style="margin-right: 20px">Sign Up</a>
+            <a class="grey-button login" href="login.html">Log In</a>
+            <div class="mobile-login-buttons">
+                <a class="blue-button sign-up" href="register.html" style="margin-right: 8px">Sign Up</a> 
+                <a class="grey-button login" href="login.html" style="margin-right: 4px">Log In</a></div>
+            <div class="burger" id="burger-menu-button" style="background-image: url('default/img/burger-menu.svg')"></div>
+        </div>
+        
+    </div>
+</header>
+<style>
+    .menu-separator {
+        border: 0;
+        border-top: 2px solid #787e8f;
+        width: 82.8%;
+        margin: 32px auto;
+    }
+    .mobile-login-buttons {
+        display: none;
+        width: 180px;
+        height: 100%;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        width: auto;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .mobile-login-buttons {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+        }
+    }
+
+    @media only screen and (max-width: 434px) {
+        .mobile-login-buttons a.blue-button.sign-up {
+            display: none;
+        }
+    }
+</style>
+<div class="burger-menu" id="burger-menu" style="left: 100%">
+    <nav class="burger-navigation">
+        
+            <a class="burger-nav__element grey body1" href="trade.html">Spot Trading</a>
+            <a class="burger-nav__element grey body1" href="about.html">About Us</a>
+            <a class="burger-nav__element grey body1" href="licenses.html">Regulatory Licenses</a>
+            <a class="burger-nav__element grey body1" href="faq.html">FAQ</a>
+            <hr class="menu-separator">
+            <a class="burger-nav__element grey body1" href="privacy.html">Privacy Policy</a>
+            <a class="burger-nav__element grey body1" href="terms.html">Term of Use</a>
+            <a class="burger-nav__element grey body1" href="cdn-cgi/l/email-protection.html#44373134342b36300423213c272c252d2a6a272b29">Contact Us</a>
+        
+    </nav>
+    
+</div>
+<script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    const burgerButton = document.getElementById("burger-menu-button");
+    const burgerMenu = document.getElementById("burger-menu");
+
+    burgerButton.addEventListener("click", () => {
+        if (burgerMenu.style.left === "0px") {
+            document.body.style.position = "";
+            document.body.style.width = "";
+            burgerMenu.style.left = "";
+            burgerButton.style.backgroundImage = "url('/default/img/burger-menu.svg')";
+        } else {
+            document.body.style.position = "fixed";
+            document.body.style.width = "100vw";
+            burgerMenu.style.left = "0px";
+            burgerButton.style.backgroundImage = "url('/default/img/burger-close.svg')";
+        }
+    });
+</script>
+
+<div class="container about risk">
+    <h1>Risk Warning</h1>
+    <div class="main-image"></div>
+    <div class="text-container">
+        <p>
+            The trading of goods and products, real or virtual, as well as virtual currencies involves significant risk. Prices can and do fluctuate on any given day. Due to such price
+            fluctuations, you may increase or lose value in your assets at any given moment. Any currency - virtual or not - may be subject to large swings in value and may even become
+            worthless. There is an inherent risk that losses will occur as a result of buying, selling or trading anything on a market.<br /><br />Bitcoin trading also has special risks not
+            generally shared with official currencies or goods or commodities in a market. Unlike most currencies, which are backed by governments or other legal entities, or by commodities
+            such as gold or silver, Bitcoin is a unique kind of "fiat" currency, backed by technology and trust. There is no central bank that can take corrective measure to protect the value
+            of Bitcoins in a crisis or issue more currency.<br /><br />Instead, Bitcoin is an as-yet autonomous and largely unregulated worldwide system of currency firms and individuals.
+            Traders put their trust in a digital, decentralized and partially anonymous system that relies on peer-to-peer networking and cryptography to maintain its integrity.<br /><br />Bitcoin
+            trading is probably susceptible to irrational (or rational) bubbles or loss of confidence, which could collapse demand relative to supply. For example, confidence might collapse in
+            Bitcoin because of unexpected changes imposed by the software developers or others, a government crackdown, the creation of superior competing alternative currencies, or a
+            deflationary or inflationary spiral. Confidence might also collapse because of technical problems: if the anonymity of the system is compromised, if money is lost or stolen, or if
+            hackers or governments are able to prevent any transactions from settling.<br /><br />There may be additional risks that we have not foreseen or identified in our Terms of Use.<br /><br />You
+            should carefully assess whether your financial situation and tolerance for risk is suitable for buying, selling or trading Bitcoins.
+        </p>
+    </div>
+</div>
+<footer>
+    <div class="footer-container">
+        <a class="logo logo-footer" href="default/img/welcome-bonus.png.html"><img src="default/img/logo.png" class="logo-image" alt="" /><span class="logo-text logo-footer-text">Gexchain</span></a>
+        <ul>
+            <li><b>Company</b></li>
+            <li><a href="about.html">About us</a></li>
+            <ul style="margin-top: 48px">
+                <li><b>Support Service:</b></li>
+                
+                <li><a href="cdn-cgi/l/email-protection.html#d1a2a4a1a1bea3a591b6b4a9b2b9b0b8bfffb2bebc"><span class="__cf_email__" data-cfemail="ccbfb9bcbca3beb88caba9b4afa4ada5a2e2afa3a1">[email&#160;protected]</span></a></li>
+            </ul>
+            <ul style="margin-top: 48px">
+                <li><b>Token Listing and Business Offers:</b></li>
+                <li><a href="cdn-cgi/l/email-protection.html#96f4e3e5fff8f3e5e5d6f1f3eef5fef7fff8b8f5f9fb"><span class="__cf_email__" data-cfemail="375542445e595244447750524f545f565e591954585a">[email&#160;protected]</span></a></li>
+            </ul>
+        </ul>
+        <ul>
+            <li><b>Legal</b></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Use</a></li>
+            <li><a href="risk.html">Risk Warning</a></li>
+            <li><a href="licenses.html">Regulatory Licenses</a></li>
+            <!-- <li><a href="/cookies">Cookies Policy</a></li> -->
+        </ul>
+        <!-- <ul>
+            <li><b>Tools & Services</b></li>
+            <li><a href="/market-crypto">Current Market</a></li>
+            <li><a href="/ventures">Ventures</a></li>
+        </ul> -->
+        <ul>
+            <li><b>Help</b></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <ul style="margin-top: 48px">
+                <li><b>Info</b></li>
+                <li><a href="fees.html">Fees</a></li>
+                <li><a href="referral.html">Referrals</a></li>
+                <li><a href="security.html">Security</a></li>
+            </ul>
+        </ul>
+        
+        <ul>
+            <li><b>Our Socials</b></li>
+            
+            <li>
+                <a href="https://www.facebook.com/Gexchain/"><i class="fa-brands fa-facebook me-2"></i>Facebook</a>
+            </li>
+             
+            
+            <li>
+                <a href="https://www.instagram.com/gexchainoffical/"><i class="fa-brands fa-instagram me-2"></i>Instagram</a>
+            </li>
+             
+            
+            <li>
+                <a href="https://twitter.com/gexchainoffical"><i class="fa-brands fa-twitter me-2"></i>Twitter</a>
+            </li>
+             
+             
+            
+            
+        </ul>
+        
+    </div>
+    <div class="copyright"><span>Copyright © 2016 - 2024 Gexchain. All rights reserved</span></div>
+</footer>
+
+
+        
+
+    <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

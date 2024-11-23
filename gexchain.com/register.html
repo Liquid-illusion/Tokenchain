@@ -1,0 +1,163 @@
+<html>
+    <head>
+        <title>Sign Up Page | Gexchain</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+
+        <link rel="icon" type="image/png" href="default/img/logo.png" />
+
+        <!-- 
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+            <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&amp;display=swap" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet" /> 
+        -->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/decimal.js/10.4.3/decimal.min.js"></script>
+
+        <script src="default/js/common.js%3Fv=1732348446223" defer></script>
+        <script src="default/js/deposits.js%3Fv=1732348446223"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css" />
+
+        <link rel="stylesheet" type="text/css" href="default/css/common.css" />
+        <link rel="stylesheet" type="text/css" href="fontawesome/css/all.css" />
+    </head>
+    <body>
+        <div class="auth-body">
+    <div class="auth-header">
+        <a class="auth-logo" href="default/img/welcome-bonus.png.html">
+            <img src="default/img/logo.png" class="logo-image" alt="" />
+            <span class="logo-text">Gexchain</span>
+        </a>
+        <div class="if-not">
+            <span>Already have an account? <a href="login.html">Log In</a> </span>
+        </div>
+    </div>
+    <div class="auth-image"></div>
+    <div class="auth-main-block">
+        <div class="auth sign-up">
+            <h2>Sign up</h2>
+            <form id="signup-form">
+                <label>
+                    Email
+                    
+                        <input id="email-input" name="email" type="email" placeholder="Email address" />
+                    
+                </label>
+                <label>
+                    Password
+                    
+                        <div class="password">
+                            <input id="password-input" name="password" type="password" placeholder="Password" />
+                            <i class="fa-regular fa-eye eye"></i>
+                        </div>
+                    
+                </label>
+                <label>
+                    Password Confirmation
+                    
+                        <div class="password">
+                            <input id="password-confirmation-input" name="password-confirmation" type="password" placeholder="Confirm password" />
+                            <i class="fa-regular fa-eye eye"></i>
+                        </div>
+                    
+                </label>
+                
+                <input id="captcha-response" name="captcha-response" type="hidden" value="" />
+                <div id="hcaptcha" class="h-captcha" name="captcha" data-sitekey="c00b171a-1b51-4d3f-8181-e24ccc898552" data-callback="submitRegister" data-size="invisible"></div>
+                <button id="send-button" class="auth-button">Continue</button>
+                <p class="check" style="margin-top: 32px">
+                    By continuing registration, you acknowledge that you are 18 years or older and that you have read and agree to the <a class="check" href="terms.html">Terms of Use</a> and <a class="check" href="privacy.html">Privacy Policy</a>.
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+<script>
+    const button = document.getElementById("send-button");
+    const oldButtonHtml = button.innerHTML;
+
+    document.getElementById("signup-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        if (!document.getElementById("email-input").value) {
+            return new Noty({ text: "You didn't enter an email", type: "error", timeout: 5000 }).show();
+        }
+
+        if (!/\S+@\S+\.\S+/.test(document.getElementById("email-input").value)) {
+            return new Noty({ text: "E-mail entered incorrectly", type: "error", timeout: 5000 }).show();
+        }
+
+        if (!document.getElementById("password-input").value) {
+            return new Noty({ text: "You didn't enter a password", type: "error", timeout: 5000 }).show();
+        }
+
+        if (document.getElementById("password-input").value.length < 8) {
+            return new Noty({ text: "Password must be at least 8 characters long", type: "error", timeout: 5000 }).show();
+        }
+
+        if (!document.getElementById("password-confirmation-input").value) {
+            return new Noty({ text: "You didn't enter a password confirmation", type: "error", timeout: 5000 }).show();
+        }
+
+        if (document.getElementById("password-input").value !== document.getElementById("password-confirmation-input").value) {
+            return new Noty({ text: "Password does not match the confirmation", type: "error", timeout: 5000 }).show();
+        }
+
+        button.setAttribute("disabled", "disabled");
+        button.innerHTML = '<i class="fa-solid fa-loader fa-spin"></i>';
+
+        try {
+            // let captcha = await hcaptcha.execute({ async: true });
+
+            // document.getElementById("captcha-response").value = captcha.response;
+
+            let response = await fetch("/register", {
+                method: "POST",
+                body: new URLSearchParams(new FormData(document.querySelector("#signup-form"))),
+            });
+
+            let json = await response.json();
+
+            if (json.success) {
+                window.location.href = json.data.step;
+            } else {
+                button.removeAttribute("disabled");
+                button.innerHTML = oldButtonHtml;
+                new Noty({ text: json.message, type: "error", timeout: 5000 }).show();
+            }
+        } catch {
+            button.removeAttribute("disabled");
+            button.innerHTML = oldButtonHtml;
+            return new Noty({ text: "You did not pass the CAPTCHA check properly. If you believe that's an error, try refreshing the page", type: "error", timeout: 5000 }).show();
+        }
+    });
+
+    const eyeIcons = document.querySelectorAll(".fa-eye");
+
+    for (const icon of eyeIcons) {
+        icon.addEventListener("click", function () {
+            const passwordField = this.previousElementSibling;
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                this.classList.add("fa-eye-slash");
+            } else {
+                passwordField.type = "password";
+                this.classList.remove("fa-eye-slash");
+            }
+        });
+    }
+</script>
+
+        
+
+    </body>
+</html>
